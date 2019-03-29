@@ -1,0 +1,25 @@
+//#9回文数
+bool isPalindrome(int x) {
+    if(x==0) return true;
+    if(x<0||x%10==0) return false;
+    queue<int> q;
+    stack<int> s;
+    while(x>9)
+    {
+        q.push(x%10);
+        s.push(x%10);
+        x/=10;
+    }
+    q.push(x);
+    s.push(x);
+    while(!q.empty())
+    {
+        if(s.top()==q.front()) 
+        {
+            s.pop();
+            q.pop();
+        }
+        else return false;
+    }
+    return true;
+}
