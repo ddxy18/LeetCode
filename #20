@@ -1,0 +1,33 @@
+//#20有效的括号
+    bool isValid(string s) {
+        stack<string> character;
+        string tmp,tmp1;
+        int i=0;
+        while(i<s.size())
+        {
+            tmp=s[i];
+            if(tmp=="("||tmp=="{"||tmp=="[") character.push(tmp);
+            if(character.empty()) return false;
+            if(tmp==")")
+            {
+                tmp1=character.top();
+                if(tmp1=="(") character.pop();
+                else return false;
+            }  
+            if(tmp=="}")
+            {
+                tmp1=character.top();
+                if(tmp1=="{") character.pop();
+                else return false;
+            }
+            if(tmp=="]")
+            {
+                tmp1=character.top();
+                if(tmp1=="[") character.pop();
+                else return false;
+            }
+            ++i;
+        }
+        if(character.empty()) return true;
+        else return false;
+    }
