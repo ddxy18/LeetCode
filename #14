@@ -1,0 +1,19 @@
+//#14最长公共前缀
+string longestCommonPrefix(vector<string>& strs) {
+        string result="";
+        char ch;
+        int j=0;
+        if(strs.empty()) return result; 
+        while(j<strs[0].size())
+        {
+            ch=strs[0][j];
+            for(int i=1;i<strs.size();++i)
+            {
+                if(j>=strs[i].length()) return result;
+                if(j<strs[i].length()&&strs[i][j]!=ch) return result;
+            }
+            ++j;
+            result+=ch;
+        }
+        return result;
+    }
