@@ -1,0 +1,41 @@
+//#671
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    stack<TreeNode*> m;
+    TreeNode* next;
+    int ans;
+    
+    int findSecondMinimumValue(TreeNode* root) {
+        int i=0;
+        ans=root->val;
+        next=root;
+        if(root!=NULL) m.push(root);
+        while(!m.empty())
+        {
+            next=m.top();
+            if(i==0&&ans!=next->val) 
+            {
+                ans=next->val;
+                ++i;
+            }
+            if(next->val<ans&&next->val!=root->val) ans=next->val;
+            m.pop();
+            if(next->left!=NULL) 
+            {
+                m.push(next->left);
+                m.push(next->right);
+            }
+        }
+        if(ans!=root->val) return ans;
+        return -1;
+    }
+};
