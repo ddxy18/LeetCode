@@ -1,0 +1,49 @@
+//#530
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+ 
+#include<algorithm>
+#include<limits.h>
+
+class Solution {
+public:
+    stack<TreeNode *> m;
+    vector<int> vals;
+    int ans;
+    
+    int getMinimumDifference(TreeNode* root) {
+        TreeNode* next=root;
+        if(root!=NULL) m.push(next);
+        next=next->left;
+        ans=INT_MAX;
+        
+        while(next!=NULL||!m.empty())
+        {
+            if(next!=NULL) 
+            {
+                m.push(next);
+                next=next->left;
+            }
+            else{
+                next=m.top();
+                m.pop();
+                vals.push_back(next->val);
+                next=next->right;
+            }
+        }
+        
+        for(int i=1;i<vals.size();++i)
+        {
+            int tmp=max(vals[i]-vals[i-1],vals[i-1]-vals[i]);
+            if(ans>tmp) ans=tmp;
+        }
+        return ans;
+    }
+};
