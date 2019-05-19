@@ -1,4 +1,4 @@
-//#671
+//#671二叉树中第二小的结点
 /**
  * Definition for a binary tree node.
  * struct TreeNode {
