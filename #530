@@ -1,4 +1,4 @@
-//#530
+//#530二叉搜索树的最小绝对差
 /**
  * Definition for a binary tree node.
  * struct TreeNode {
