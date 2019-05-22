@@ -1,4 +1,4 @@
-//#622循环队列
+//#622 循环队列
 class MyCircularQueue {
     private:
             vector<int> data;
