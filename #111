@@ -1,0 +1,21 @@
+//#111 二叉树的最小深度
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    int minDepth(TreeNode* root) {
+        if(root==NULL) return 0;
+        int lHeight=minDepth(root->left);
+        int rHeight=minDepth(root->right);
+        if(lHeight==0||rHeight==0)
+            return (lHeight==0)?1+rHeight:1+lHeight;
+        return 1+min(lHeight,rHeight);
+    }
+};
