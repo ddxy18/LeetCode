@@ -1,0 +1,44 @@
+//#993 二叉树的堂兄弟节点
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    bool isCousins(TreeNode* root, int x, int y) {
+        int length;
+        bool isFound1=false,isFound2=false;
+        TreeNode *tmp=root;
+        queue<TreeNode*> node;
+        node.push(root);
+        length=1;
+        while(!node.empty())
+        {
+            tmp=node.front();
+            node.pop();
+            --length;
+            if(tmp->left!=NULL&&(tmp->left->val==x||tmp->left->val==y))
+            {
+                if(isFound1==false) isFound1=true;
+                else isFound2=true;
+                if(tmp->right!=NULL&&(tmp->right->val==x||tmp->right->val==y)) return false;
+            }
+            if(tmp->right!=NULL&&(tmp->right->val==x||tmp->right->val==y)) 
+            {
+                if(isFound1==false) isFound1=true;
+                else isFound2=true;
+            }
+            if(isFound1&&isFound2) return true;
+            if(tmp->left!=NULL) node.push(tmp->left);
+            if(tmp->right!=NULL) node.push(tmp->right);
+            if(length==0&&(isFound1+isFound2==0)) length=node.size();
+            if(length==0&&(isFound1+isFound2==1)) return false;
+        }
+        return false;
+    }
+};
