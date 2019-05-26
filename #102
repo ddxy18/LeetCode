@@ -1,0 +1,38 @@
+//#102 二叉树的层次遍历
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    vector<vector<int>> levelOrder(TreeNode* root) {
+        int length;
+        TreeNode *tmp=root;
+        queue<TreeNode*> node;
+        vector<vector<int>> ans;
+        vector<int> level;
+        if(root!=NULL) node.push(root);
+        length=1;
+        while(!node.empty())
+        {
+            tmp=node.front();
+            level.push_back(tmp->val);
+            node.pop();
+            --length;
+            if(tmp->left!=NULL) node.push(tmp->left);
+            if(tmp->right!=NULL) node.push(tmp->right);
+            if(length==0) 
+            {
+                length=node.size();
+                ans.push_back(level);
+                level.clear();   
+            }
+        }
+        return ans;
+    }
+};
