@@ -1,0 +1,26 @@
+//#965 单值二叉树
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    bool isUnivalTree(TreeNode* root) {
+        int val=root->val;
+        queue<TreeNode*> q;
+        q.push(root);
+        while(!q.empty()) {
+            TreeNode* tmp=q.front();
+            if(tmp->val!=val) return false;
+            q.pop();
+            if(tmp->left!=NULL) q.push(tmp->left);
+            if(tmp->right!=NULL) q.push(tmp->right);
+        }
+        return true;
+    }
+};
